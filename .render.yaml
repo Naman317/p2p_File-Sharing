@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: backend
+    env: java
+    buildCommand: javac -d out src/main/java/p2p/*.java
+    startCommand: cd out && java p2p.App
+
+  - type: static
+    name: frontend
+    rootDir: ui
+    buildCommand: npm install && npm run build
+    staticPublishPath: out
