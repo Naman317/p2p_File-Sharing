@@ -22,7 +22,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8081
+      - NEXT_PUBLIC_API_URL=http://backend:8081|| p2p.railway.internal
     depends_on:
       - backend
     networks:
