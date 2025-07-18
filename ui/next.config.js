@@ -14,7 +14,7 @@ const nextConfig = {
       {
         source: '/api/download/:port',
         destination: isProd
-          ? 'https:/p2p_file-sharing.railway.internal/download/:port'
+          ? 'https://p2p_file-sharing.railway.internal/download/:port'
           : 'http://localhost:8081/download/:port',
       },
     ];
