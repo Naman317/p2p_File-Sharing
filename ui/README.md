@@ -1,5 +1,3 @@
-# PeerLink UI
-
 This is the frontend UI for the PeerLink P2P file sharing application. It's built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
@@ -46,6 +44,7 @@ npm start
 ## How to Use
 
 1. **Share a File**:
+
    - Go to the "Share a File" tab
    - Drag and drop a file or click to select one
    - Once uploaded, you'll receive an invite code (port number)
