@@ -1,8 +1,13 @@
+# Dockerfile.frontend
+
 FROM node:18-alpine
 WORKDIR /app
+
 COPY ui/package*.json ./
 RUN npm install
-COPY ui/ .
+
+COPY ui/ ./
 RUN npm run build
+
 EXPOSE 3000
 CMD ["npm", "start"]

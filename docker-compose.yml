@@ -1,4 +1,5 @@
-version: "3"
+version: "3.8"
+
 services:
   backend:
     build:
@@ -6,12 +7,13 @@ services:
       dockerfile: Dockerfile.backend
     ports:
       - "8081:8081"
-    # Expose the dynamic port range for P2P file sharing
     expose:
-      - "49152-65535:49152-65535"
-    # For production, you might want to add port mappings for the dynamic ports
-    # ports:
-    #   - "49152-65535:49152-65535"
+      - "49152-65535"
+    networks:
+      - app-network
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
 
   frontend:
     build:
@@ -20,6 +22,15 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8081
+      - NEXT_PUBLIC_API_URL=http://backend:8081
     depends_on:
       - backend
+    networks:
+      - app-network
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+networks:
+  app-network:
+    driver: bridge
