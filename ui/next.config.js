@@ -1,5 +1,3 @@
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -7,15 +5,11 @@ const nextConfig = {
     return [
       {
         source: '/api/upload',
-        destination: isProd
-          ? 'https://p2pfile.up.railway.app/upload'
-          : 'http://localhost:8081/upload',
+        destination: 'http://backend:8081/upload',
       },
       {
         source: '/api/download/:port',
-        destination: isProd
-          ? 'https://p2pfile.up.railway.app/download/:port'
-          : 'http://localhost:8081/download/:port',
+        destination: 'http://backend:8081/download/:port',
       },
     ];
   },
