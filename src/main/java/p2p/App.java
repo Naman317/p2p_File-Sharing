@@ -9,6 +9,7 @@ import java.io.IOException;
 public class App {
     public static void main(String[] args) {
         try {
+
             // Start the API server on port 8081
             int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8081"));
             FileController fileController = new FileController(port);

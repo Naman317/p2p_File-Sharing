@@ -8,13 +8,13 @@ const nextConfig = {
       {
         source: '/api/upload',
         destination: isProd
-          ? 'https://p2p-file-sharing.railway.internal/upload'
+          ? 'https://p2pfile.up.railway.app/upload'
           : 'http://localhost:8081/upload',
       },
       {
         source: '/api/download/:port',
         destination: isProd
-          ? 'https://p2p-file-sharing.railway.internal/download/:port'
+          ? 'https://p2pfile.up.railway.app/download/:port'
           : 'http://localhost:8081/download/:port',
       },
     ];
