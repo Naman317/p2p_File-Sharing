@@ -24,9 +24,12 @@ public class App {
                 fileController.stop();
             }));
 
-            System.out.println("Press Enter to stop the server");
-            System.in.read();
-
+            System.out.println("Server running. Press Ctrl+C or terminate process to stop.");
+            try {
+                Thread.currentThread().join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         } catch (IOException e) {
             System.err.println("Error starting server: " + e.getMessage());
             e.printStackTrace();
