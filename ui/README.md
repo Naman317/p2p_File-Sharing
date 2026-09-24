@@ -58,7 +58,7 @@ npm start
 
 ## Backend Integration
 
-The UI communicates with the Java backend running on port 8080. Make sure the backend server is running before using the UI.
+The UI communicates with the Java backend running on port 8081. Make sure the backend server is running before using the UI.
 
 To start the backend server:
 

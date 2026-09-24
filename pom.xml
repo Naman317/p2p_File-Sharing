@@ -7,9 +7,8 @@
   <artifactId>p2p</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>.</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>PeerLink</name>
+  <description>P2P File Sharing Application</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
