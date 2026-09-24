@@ -2,11 +2,19 @@ services:
   - type: web
     name: backend
     env: java
-    buildCommand: javac -d out src/main/java/p2p/*.java
-    startCommand: cd out && java p2p.App
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/p2p-1.0-SNAPSHOT.jar
+    envVars:
+      - key: PORT
+        value: 8081
 
-  - type: static
+  - type: web
     name: frontend
     rootDir: ui
     buildCommand: npm install && npm run build
-    staticPublishPath: out
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
