@@ -1,6 +1,10 @@
 const getBackendUrl = () => {
   if (process.env.BACKEND_URL) {
-    return process.env.BACKEND_URL;
+    let url = process.env.BACKEND_URL.trim();
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = `http://${url}`;
+    }
+    return url;
   }
   if (process.env.DOCKER_ENV === 'true') {
     return 'http://backend:8081';

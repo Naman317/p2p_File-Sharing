@@ -20,3 +20,5 @@ services:
         value: production
       - key: PORT
         value: 3000
+      - key: BACKEND_URL
+        value: http://backend:8081
