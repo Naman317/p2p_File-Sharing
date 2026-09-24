@@ -9,7 +9,7 @@ services:
         value: 8081
 
   - type: web
-    name: frontend
+    name: peerlink-share
     runtime: node
     plan: free
     rootDir: ui
