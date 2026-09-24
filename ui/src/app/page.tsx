@@ -6,6 +6,10 @@ import FileDownload from '@/components/FileDownload';
 import InviteCode from '@/components/InviteCode';
 import axios from 'axios';
 
+const apiBase = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+const uploadUrl = apiBase ? `${apiBase}/upload` : '/api/upload';
+const getDownloadUrl = (port: number) => (apiBase ? `${apiBase}/download/${port}` : `/api/download/${port}`);
+
 export default function Home() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -24,7 +28,7 @@ export default function Home() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await axios.post('/api/upload', formData, {
+      const response = await axios.post(uploadUrl, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -40,9 +44,13 @@ export default function Home() {
 
       setUploadProgress(100);
       setPort(response.data.port);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error uploading file:', error);
-      alert('Failed to upload file. Please try again.');
+      let errorMsg = 'Network error or backend starting up';
+      if (axios.isAxiosError(error)) {
+        errorMsg = error.response?.data?.error || error.message || errorMsg;
+      }
+      alert(`Upload failed: ${errorMsg}. If the backend just woke up on Render, please wait 30 seconds and try again.`);
     } finally {
       setIsUploading(false);
     }
@@ -53,7 +61,7 @@ export default function Home() {
     setDownloadProgress(0);
 
     try {
-      const response = await axios.get(`/api/download/${port}`, {
+      const response = await axios.get(getDownloadUrl(port), {
         responseType: 'blob',
         onDownloadProgress: (progressEvent) => {
           if (progressEvent.total) {
@@ -91,9 +99,13 @@ export default function Home() {
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error downloading file:', error);
-      alert('Failed to download file. Please check the invite code and try again.');
+      let errorMsg = 'Failed to download file';
+      if (axios.isAxiosError(error)) {
+        errorMsg = error.response?.data?.error || error.message || errorMsg;
+      }
+      alert(`Download failed: ${errorMsg}. Please check the invite code and try again.`);
     } finally {
       setIsDownloading(false);
     }
